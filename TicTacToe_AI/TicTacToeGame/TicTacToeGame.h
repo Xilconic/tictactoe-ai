@@ -63,6 +63,16 @@ struct TICTACTOEGAME_API BoardState
  The tic-tac-toe game engine.
 */
 class TICTACTOEGAME_API TicTacToeGame {
+private:
+	BoardState state;
 public:
+	/*
+	 Initializes a game of tic-tac-toe.
+	*/
 	TicTacToeGame(void);
+
+	/*
+	 Gets the curent board state.
+	*/
+	BoardState getCurrentState(void);
 };

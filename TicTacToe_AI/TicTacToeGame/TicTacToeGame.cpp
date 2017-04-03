@@ -6,5 +6,11 @@
 
 TicTacToeGame::TicTacToeGame()
 {
+	state.curentPlayer = X;
     return;
+}
+
+BoardState TicTacToeGame::getCurrentState()
+{
+	return state;
 }

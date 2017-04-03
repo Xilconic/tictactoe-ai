@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TicTacToe_AI", "TicTacToe_AI\TicTacToe_AI.vcxproj", "{0C247586-D63D-4239-B9A3-37AE42856169}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TicTacToeGame", "TicTacToeGame\TicTacToeGame.vcxproj", "{7C6AAA91-2934-4670-A47E-054EB2797073}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TicTacToeGameTests", "TicTacToeGameTests\TicTacToeGameTests.vcxproj", "{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C6AAA91-2934-4670-A47E-054EB2797073} = {7C6AAA91-2934-4670-A47E-054EB2797073}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +28,22 @@ Global
 		{0C247586-D63D-4239-B9A3-37AE42856169}.Release|x64.Build.0 = Release|x64
 		{0C247586-D63D-4239-B9A3-37AE42856169}.Release|x86.ActiveCfg = Release|Win32
 		{0C247586-D63D-4239-B9A3-37AE42856169}.Release|x86.Build.0 = Release|Win32
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Debug|x64.ActiveCfg = Debug|x64
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Debug|x64.Build.0 = Debug|x64
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Debug|x86.ActiveCfg = Debug|Win32
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Debug|x86.Build.0 = Debug|Win32
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Release|x64.ActiveCfg = Release|x64
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Release|x64.Build.0 = Release|x64
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Release|x86.ActiveCfg = Release|Win32
+		{7C6AAA91-2934-4670-A47E-054EB2797073}.Release|x86.Build.0 = Release|Win32
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Debug|x64.ActiveCfg = Debug|x64
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Debug|x64.Build.0 = Debug|x64
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Debug|x86.ActiveCfg = Debug|Win32
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Debug|x86.Build.0 = Debug|Win32
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Release|x64.ActiveCfg = Release|x64
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Release|x64.Build.0 = Release|x64
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Release|x86.ActiveCfg = Release|Win32
+		{0D98BD05-0FD4-44E1-A6FB-BDD0EF1DF812}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

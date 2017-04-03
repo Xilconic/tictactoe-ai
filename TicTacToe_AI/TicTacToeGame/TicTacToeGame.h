@@ -15,7 +15,7 @@
 /*
  Denotes the player, if any.
 */
-enum TICTACTOEGAME_API PlayerIndicator 
+enum class TICTACTOEGAME_API PlayerIndicator 
 {
 	/*
 	 Denoted the absense of a player.
@@ -32,6 +32,26 @@ enum TICTACTOEGAME_API PlayerIndicator
 };
 
 /*
+ Denotes the row to play a piece to.
+*/
+enum class TICTACTOEGAME_API RowIndicator
+{
+	Top = 0,
+	Middle = 1,
+	Bottom = 2
+};
+
+/*
+ Denotes the column to play a piece to.
+*/
+enum class TICTACTOEGAME_API ColumnIndicator
+{
+	Left = 0,
+	Middle = 1,
+	Right = 2
+};
+
+/*
  Class holding the state of a game of TicTacToe.
 */
 struct TICTACTOEGAME_API BoardState 
@@ -42,21 +62,21 @@ struct TICTACTOEGAME_API BoardState
 	std::array<std::array<PlayerIndicator, 3>, 3> boardCells = 
 	{
 		{
-			{{ None, None, None }},
-			{{ None, None, None }},
-			{{ None, None, None }}
+			{{ PlayerIndicator::None, PlayerIndicator::None, PlayerIndicator::None }},
+			{{ PlayerIndicator::None, PlayerIndicator::None, PlayerIndicator::None }},
+			{{ PlayerIndicator::None, PlayerIndicator::None, PlayerIndicator::None }}
 		}
 	};
 
 	/*
 	 Indicates the player whose turn it it.
 	*/
-	PlayerIndicator curentPlayer = None;
+	PlayerIndicator curentPlayer = PlayerIndicator::None;
 
 	/*
 	 Indicates the winner of the game.
 	*/
-	PlayerIndicator winner = None;
+	PlayerIndicator winner = PlayerIndicator::None;
 };
 
 /*
@@ -65,6 +85,7 @@ struct TICTACTOEGAME_API BoardState
 class TICTACTOEGAME_API TicTacToeGame {
 private:
 	BoardState state;
+	void toggleNextPlayer(void);
 public:
 	/*
 	 Initializes a game of tic-tac-toe.
@@ -75,4 +96,9 @@ public:
 	 Gets the curent board state.
 	*/
 	BoardState getCurrentState(void);
+
+	/*
+	 Marks the move of a player playing a piece to the board. Returns false for an invalid move.
+	*/
+	bool playPiece(PlayerIndicator, RowIndicator, ColumnIndicator);
 };

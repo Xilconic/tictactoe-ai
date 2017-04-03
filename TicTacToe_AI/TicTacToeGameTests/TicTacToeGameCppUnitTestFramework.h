@@ -14,11 +14,11 @@ namespace Microsoft
 			{
 				switch (indicator)
 				{
-				case None:
+				case PlayerIndicator::None:
 					return L"None";
-				case X:
+				case PlayerIndicator::X:
 					return L"X";
-				case O:
+				case PlayerIndicator::O:
 					return L"O";
 				default:
 					return L"";

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __TICTACTOEGAME_CPPUNITTESTFRAMEWORK_H_INCLUDED__
+#define __TICTACTOEGAME_CPPUNITTESTFRAMEWORK_H_INCLUDED__
+
 #include "CppUnitTest.h"
 #include "..\TicTacToeGame\TicTacToeGame.h"
 
@@ -27,3 +29,5 @@ namespace Microsoft
 		}
 	}
 }
+
+#endif // !__TICTACTOEGAME_CPPUNITTESTFRAMEWORK_H_INCLUDED__

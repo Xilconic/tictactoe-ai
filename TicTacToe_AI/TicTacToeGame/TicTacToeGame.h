@@ -1,3 +1,6 @@
+#ifndef __TICTACTOE_GAME_H_INCLUDED__
+#define __TICTACTOE_GAME_H_INCLUDED__
+
 #include <array>
 
 // The following ifdef block is the standard way of creating macros which make exporting 
@@ -13,26 +16,26 @@
 #endif
 
 /*
- Denotes the player, if any.
+Denotes the player, if any.
 */
-enum class TICTACTOEGAME_API Player 
+enum class TICTACTOEGAME_API Player
 {
 	/*
-	 Denoted the absense of a player.
+	Denoted the absense of a player.
 	*/
 	None,
 	/*
-	 Denotes the 'X' player.
+	Denotes the 'X' player.
 	*/
 	X,
 	/*
-	 Denotes the 'O' player.
+	Denotes the 'O' player.
 	*/
-	O 
+	O
 };
 
 /*
- Denotes the row to play a piece to.
+Denotes the row to play a piece to.
 */
 enum class TICTACTOEGAME_API Row
 {
@@ -42,7 +45,7 @@ enum class TICTACTOEGAME_API Row
 };
 
 /*
- Denotes the column to play a piece to.
+Denotes the column to play a piece to.
 */
 enum class TICTACTOEGAME_API Column
 {
@@ -52,40 +55,40 @@ enum class TICTACTOEGAME_API Column
 };
 
 /*
- Class holding the state of a game of TicTacToe.
+Class holding the state of a game of TicTacToe.
 */
-struct TICTACTOEGAME_API BoardState 
+struct TICTACTOEGAME_API BoardState
 {
 	/*
-	 The state of the 3x3 game board, indicating where players have played their pieces.
+	The state of the 3x3 game board, indicating where players have played their pieces.
 	*/
-	std::array<std::array<Player, 3>, 3> boardCells = 
+	std::array<std::array<Player, 3>, 3> boardCells =
 	{
 		{
-			{{ Player::None, Player::None, Player::None }},
-			{{ Player::None, Player::None, Player::None }},
-			{{ Player::None, Player::None, Player::None }}
+			{ { Player::None, Player::None, Player::None } },
+			{ { Player::None, Player::None, Player::None } },
+			{ { Player::None, Player::None, Player::None } }
 		}
 	};
 
 	/*
-	 Indicates the player whose turn it it.
+	Indicates the player whose turn it it.
 	*/
 	Player curentPlayer = Player::None;
 
 	/*
-	 Indicates the winner of the game.
+	Indicates the winner of the game.
 	*/
 	Player winner = Player::None;
 
 	/*
-	 Indicates if the game is finished.
+	Indicates if the game is finished.
 	*/
 	bool gameFinished = false;
 };
 
 /*
- The tic-tac-toe game engine.
+The tic-tac-toe game engine.
 */
 class TICTACTOEGAME_API TicTacToeGame {
 private:
@@ -97,25 +100,27 @@ private:
 	bool isThreeInRow(Player, Row);
 	bool isThreeInColumn(Player, Column);
 	bool isThreeInDiagonal(Player);
-	
+
 public:
 	/*
-	 Initializes a game of tic-tac-toe.
+	Initializes a game of tic-tac-toe.
 	*/
 	TicTacToeGame(void);
 
 	/*
-	 Gets the curent board state.
+	Gets the curent board state.
 	*/
 	BoardState getCurrentState(void);
 
 	/*
-	 Marks the move of a player playing a piece to the board. Returns false for an invalid move.
+	Marks the move of a player playing a piece to the board. Returns false for an invalid move.
 	*/
 	bool playPiece(Player, Row, Column);
 
 	/*
-	 Resets the board to the starting situation.
+	Resets the board to the starting situation.
 	*/
 	void reset(void);
 };
+
+#endif // !__TICTACTOE_GAME_H_INCLUDED__

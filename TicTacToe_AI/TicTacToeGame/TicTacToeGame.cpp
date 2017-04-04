@@ -53,7 +53,7 @@ bool TicTacToeGame::isThreeInDiagonal(Player player)
 Player TicTacToeGame::determineWinner()
 {
 	Player players[2] = { Player::X, Player::O };
-	for (char i = 0; i < state.boardCells.size(); i++)
+	for (size_t i = 0; i < state.boardCells.size(); i++)
 	{
 		for each (Player player in players)
 		{
@@ -64,7 +64,7 @@ Player TicTacToeGame::determineWinner()
 		}
 	}
 
-	for (char i = 0; i < state.boardCells[0].size(); i++)
+	for (size_t i = 0; i < state.boardCells[0].size(); i++)
 	{
 		for each (Player player in players)
 		{

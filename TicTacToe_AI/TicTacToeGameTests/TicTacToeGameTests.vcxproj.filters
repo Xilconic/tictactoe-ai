@@ -32,5 +32,8 @@
     <ClCompile Include="TicTacToeGameTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TicTacToeGamePlayerTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -147,6 +147,8 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TicTacToeCommon.h" />
+    <ClInclude Include="TicTacToeExportApi.h" />
     <ClInclude Include="TicTacToeGame.h" />
   </ItemGroup>
   <ItemGroup>

@@ -77,6 +77,11 @@ struct TICTACTOEGAME_API BoardState
 	 Indicates the winner of the game.
 	*/
 	PlayerIndicator winner = PlayerIndicator::None;
+
+	/*
+	 Indicates if the game is finished.
+	*/
+	bool gameFinished = false;
 };
 
 /*
@@ -85,7 +90,14 @@ struct TICTACTOEGAME_API BoardState
 class TICTACTOEGAME_API TicTacToeGame {
 private:
 	BoardState state;
+	char nrOfPiecesPlayed;
+
 	void toggleNextPlayer(void);
+	PlayerIndicator determineWinner(void);
+	bool isThreeInRow(PlayerIndicator, RowIndicator);
+	bool isThreeInColumn(PlayerIndicator, ColumnIndicator);
+	bool isThreeInDiagonal(PlayerIndicator);
+	
 public:
 	/*
 	 Initializes a game of tic-tac-toe.
@@ -101,4 +113,9 @@ public:
 	 Marks the move of a player playing a piece to the board. Returns false for an invalid move.
 	*/
 	bool playPiece(PlayerIndicator, RowIndicator, ColumnIndicator);
+
+	/*
+	 Resets the board to the starting situation.
+	*/
+	void reset(void);
 };

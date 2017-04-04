@@ -150,6 +150,7 @@
     <ClInclude Include="TicTacToeCommon.h" />
     <ClInclude Include="TicTacToeExportApi.h" />
     <ClInclude Include="TicTacToeGame.h" />
+    <ClInclude Include="TicTacToeGameEnvironment.h" />
     <ClInclude Include="TicTacToeGamePlayer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,7 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TicTacToeGame.cpp" />
+    <ClCompile Include="TicTacToeGameEnvironment.cpp" />
     <ClCompile Include="TicTacToeGamePlayer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

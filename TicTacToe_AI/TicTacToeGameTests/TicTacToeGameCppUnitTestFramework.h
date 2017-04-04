@@ -4,6 +4,7 @@
 #include "CppUnitTest.h"
 #include "..\TicTacToeGame\TicTacToeGame.h"
 #include "..\TicTacToeGame\TicTacToeGamePlayer.h"
+#include "..\TicTacToeGame\TicTacToeGameEnvironment.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

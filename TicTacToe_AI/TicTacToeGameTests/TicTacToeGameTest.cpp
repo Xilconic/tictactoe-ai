@@ -19,13 +19,13 @@ namespace TicTacToeGameTests
 				Assert::AreEqual(3, (int)state.boardCells.at(i).size());
 				for (size_t j = 0; j < state.boardCells.at(i).size(); j++)
 				{
-					PlayerIndicator expectedValue = PlayerIndicator::None;
+					Player expectedValue = Player::None;
 					Assert::AreEqual(expectedValue, state.boardCells.at(i).at(j));
 				}
 			}
 
-			Assert::AreEqual(PlayerIndicator::None, state.curentPlayer);
-			Assert::AreEqual(PlayerIndicator::None, state.winner);
+			Assert::AreEqual(Player::None, state.curentPlayer);
+			Assert::AreEqual(Player::None, state.winner);
 			Assert::IsFalse(state.gameFinished);
 		}
 
@@ -41,12 +41,12 @@ namespace TicTacToeGameTests
 				Assert::AreEqual(3, (int)currentState.boardCells.at(i).size());
 				for (size_t j = 0; j < currentState.boardCells.at(i).size(); j++)
 				{
-					PlayerIndicator expectedValue = PlayerIndicator::None;
+					Player expectedValue = Player::None;
 					Assert::AreEqual(expectedValue, currentState.boardCells.at(i).at(j));
 				}
 			}
-			Assert::AreEqual(PlayerIndicator::X, currentState.curentPlayer);
-			Assert::AreEqual(PlayerIndicator::None, currentState.winner);
+			Assert::AreEqual(Player::X, currentState.curentPlayer);
+			Assert::AreEqual(Player::None, currentState.winner);
 			Assert::IsFalse(currentState.gameFinished);
 		}
 
@@ -56,19 +56,19 @@ namespace TicTacToeGameTests
 
 			BoardState currentState = game.getCurrentState();
 
-			Assert::AreEqual(PlayerIndicator::X, currentState.curentPlayer);
+			Assert::AreEqual(Player::X, currentState.curentPlayer);
 
-			currentState.curentPlayer = PlayerIndicator::O;
+			currentState.curentPlayer = Player::O;
 
 			BoardState currentState2 = game.getCurrentState();
-			Assert::AreEqual(PlayerIndicator::X, currentState2.curentPlayer);
+			Assert::AreEqual(Player::X, currentState2.curentPlayer);
 		}
 
 		TEST_METHOD(AssertPlayPieceReturnsFalseWhenPlayingForNone)
 		{
 			TicTacToeGame game;
 
-			bool isValid = game.playPiece(PlayerIndicator::None, RowIndicator::Middle, ColumnIndicator::Middle);
+			bool isValid = game.playPiece(Player::None, Row::Middle, Column::Middle);
 
 			Assert::IsFalse(isValid);
 		}
@@ -77,9 +77,9 @@ namespace TicTacToeGameTests
 		{
 			TicTacToeGame game;
 
-			Assert::AreEqual(PlayerIndicator::X, game.getCurrentState().curentPlayer);
+			Assert::AreEqual(Player::X, game.getCurrentState().curentPlayer);
 
-			bool isValid = game.playPiece(PlayerIndicator::O, RowIndicator::Middle, ColumnIndicator::Middle);
+			bool isValid = game.playPiece(Player::O, Row::Middle, Column::Middle);
 
 			Assert::IsFalse(isValid);
 		}
@@ -87,11 +87,11 @@ namespace TicTacToeGameTests
 		TEST_METHOD(AssertPlayPieceThrowsExceptionWhenPlayingForXWhenCurrentPlayerO)
 		{
 			TicTacToeGame game;
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Middle);
+			game.playPiece(Player::X, Row::Middle, Column::Middle);
 
-			Assert::AreEqual(PlayerIndicator::O, game.getCurrentState().curentPlayer);
+			Assert::AreEqual(Player::O, game.getCurrentState().curentPlayer);
 
-			bool isValid = game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Middle);
+			bool isValid = game.playPiece(Player::X, Row::Middle, Column::Middle);
 
 			Assert::IsFalse(isValid);
 		}
@@ -102,18 +102,18 @@ namespace TicTacToeGameTests
 
 			for (char i = 0; i < 3; i++)
 			{
-				RowIndicator row = RowIndicator(i);
+				Row row = Row(i);
 				for (char j = 0; j < 3; j++)
 				{
-					ColumnIndicator column = ColumnIndicator(j);
+					Column column = Column(j);
 
-					bool isValid = game.playPiece(PlayerIndicator::X, row, column);
+					bool isValid = game.playPiece(Player::X, row, column);
 
 					Assert::IsTrue(isValid);
 
 					BoardState state = game.getCurrentState();
-					Assert::AreEqual(PlayerIndicator::O, state.curentPlayer);
-					Assert::AreEqual(PlayerIndicator::X, state.boardCells[i][j]);
+					Assert::AreEqual(Player::O, state.curentPlayer);
+					Assert::AreEqual(Player::X, state.boardCells[i][j]);
 					Assert::IsFalse(state.gameFinished);
 
 					game.reset();
@@ -127,22 +127,22 @@ namespace TicTacToeGameTests
 
 			for (char i = 0; i < 3; i++)
 			{
-				RowIndicator row = RowIndicator(i);
+				Row row = Row(i);
 				for (char j = 0; j < 3; j++)
 				{
-					ColumnIndicator column = ColumnIndicator(j);
+					Column column = Column(j);
 
-					bool isValid = game.playPiece(PlayerIndicator::X, row, column);
+					bool isValid = game.playPiece(Player::X, row, column);
 
 					Assert::IsTrue(isValid);
 
-					isValid = game.playPiece(PlayerIndicator::O, row, column);
+					isValid = game.playPiece(Player::O, row, column);
 
 					Assert::IsFalse(isValid);
 
 					BoardState state = game.getCurrentState();
-					Assert::AreEqual(PlayerIndicator::O, state.curentPlayer);
-					Assert::AreEqual(PlayerIndicator::X, state.boardCells[i][j]);
+					Assert::AreEqual(Player::O, state.curentPlayer);
+					Assert::AreEqual(Player::X, state.boardCells[i][j]);
 
 					game.reset();
 				}
@@ -155,19 +155,19 @@ namespace TicTacToeGameTests
 
 			for (char i = 0; i < 3; i++)
 			{
-				RowIndicator rowX = RowIndicator(i);
-				RowIndicator rowO = i == 0 ? RowIndicator::Middle : RowIndicator::Top;
+				Row rowX = Row(i);
+				Row rowO = i == 0 ? Row::Middle : Row::Top;
 
-				game.playPiece(PlayerIndicator::X, rowX, ColumnIndicator::Left);
-				game.playPiece(PlayerIndicator::O, rowO, ColumnIndicator::Left);
+				game.playPiece(Player::X, rowX, Column::Left);
+				game.playPiece(Player::O, rowO, Column::Left);
 
-				game.playPiece(PlayerIndicator::X, rowX, ColumnIndicator::Middle);
-				game.playPiece(PlayerIndicator::O, rowO, ColumnIndicator::Middle);
+				game.playPiece(Player::X, rowX, Column::Middle);
+				game.playPiece(Player::O, rowO, Column::Middle);
 
-				game.playPiece(PlayerIndicator::X, rowX, ColumnIndicator::Right);
+				game.playPiece(Player::X, rowX, Column::Right);
 
 				BoardState state = game.getCurrentState();
-				Assert::AreEqual(PlayerIndicator::X, state.winner);
+				Assert::AreEqual(Player::X, state.winner);
 				Assert::IsTrue(state.gameFinished);
 
 				game.reset();
@@ -180,21 +180,21 @@ namespace TicTacToeGameTests
 
 			for (char i = 0; i < 3; i++)
 			{
-				RowIndicator rowX = i == 0 ? RowIndicator::Middle : RowIndicator::Top;
-				RowIndicator rowO = RowIndicator(i);
+				Row rowX = i == 0 ? Row::Middle : Row::Top;
+				Row rowO = Row(i);
 
-				game.playPiece(PlayerIndicator::X, rowX, ColumnIndicator::Left);
-				game.playPiece(PlayerIndicator::O, rowO, ColumnIndicator::Left);
+				game.playPiece(Player::X, rowX, Column::Left);
+				game.playPiece(Player::O, rowO, Column::Left);
 
-				game.playPiece(PlayerIndicator::X, rowX, ColumnIndicator::Middle);
-				game.playPiece(PlayerIndicator::O, rowO, ColumnIndicator::Middle);
+				game.playPiece(Player::X, rowX, Column::Middle);
+				game.playPiece(Player::O, rowO, Column::Middle);
 
-				rowX = i == 2 ? RowIndicator::Middle : RowIndicator::Bottom;
-				game.playPiece(PlayerIndicator::X, rowX, ColumnIndicator::Left);
-				game.playPiece(PlayerIndicator::O, rowO, ColumnIndicator::Right);
+				rowX = i == 2 ? Row::Middle : Row::Bottom;
+				game.playPiece(Player::X, rowX, Column::Left);
+				game.playPiece(Player::O, rowO, Column::Right);
 
 				BoardState state = game.getCurrentState();
-				Assert::AreEqual(PlayerIndicator::O, state.winner);
+				Assert::AreEqual(Player::O, state.winner);
 				Assert::IsTrue(state.gameFinished);
 
 				game.reset();
@@ -207,19 +207,19 @@ namespace TicTacToeGameTests
 
 			for (char i = 0; i < 3; i++)
 			{
-				ColumnIndicator colX = ColumnIndicator(i);
-				ColumnIndicator colO = i == 0 ? ColumnIndicator::Middle : ColumnIndicator::Left;
+				Column colX = Column(i);
+				Column colO = i == 0 ? Column::Middle : Column::Left;
 
-				game.playPiece(PlayerIndicator::X, RowIndicator::Top, colX);
-				game.playPiece(PlayerIndicator::O, RowIndicator::Top, colO);
+				game.playPiece(Player::X, Row::Top, colX);
+				game.playPiece(Player::O, Row::Top, colO);
 
-				game.playPiece(PlayerIndicator::X, RowIndicator::Middle, colX);
-				game.playPiece(PlayerIndicator::O, RowIndicator::Middle, colO);
+				game.playPiece(Player::X, Row::Middle, colX);
+				game.playPiece(Player::O, Row::Middle, colO);
 
-				game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, colX);
+				game.playPiece(Player::X, Row::Bottom, colX);
 
 				BoardState state = game.getCurrentState();
-				Assert::AreEqual(PlayerIndicator::X, state.winner);
+				Assert::AreEqual(Player::X, state.winner);
 				Assert::IsTrue(state.gameFinished);
 
 				game.reset();
@@ -232,21 +232,21 @@ namespace TicTacToeGameTests
 
 			for (char i = 0; i < 3; i++)
 			{
-				ColumnIndicator colX = i == 0 ? ColumnIndicator::Middle : ColumnIndicator::Left;
-				ColumnIndicator colO = ColumnIndicator(i);
+				Column colX = i == 0 ? Column::Middle : Column::Left;
+				Column colO = Column(i);
 
-				game.playPiece(PlayerIndicator::X, RowIndicator::Top, colX);
-				game.playPiece(PlayerIndicator::O, RowIndicator::Top, colO);
+				game.playPiece(Player::X, Row::Top, colX);
+				game.playPiece(Player::O, Row::Top, colO);
 
-				game.playPiece(PlayerIndicator::X, RowIndicator::Middle, colX);
-				game.playPiece(PlayerIndicator::O, RowIndicator::Middle, colO);
+				game.playPiece(Player::X, Row::Middle, colX);
+				game.playPiece(Player::O, Row::Middle, colO);
 
-				colX = i == 2 ? ColumnIndicator::Middle : ColumnIndicator::Right;
-				game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, colX);
-				game.playPiece(PlayerIndicator::O, RowIndicator::Bottom, colO);
+				colX = i == 2 ? Column::Middle : Column::Right;
+				game.playPiece(Player::X, Row::Bottom, colX);
+				game.playPiece(Player::O, Row::Bottom, colO);
 
 				BoardState state = game.getCurrentState();
-				Assert::AreEqual(PlayerIndicator::O, state.winner);
+				Assert::AreEqual(Player::O, state.winner);
 				Assert::IsTrue(state.gameFinished);
 
 				game.reset();
@@ -257,30 +257,30 @@ namespace TicTacToeGameTests
 		{
 			TicTacToeGame game;
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Top, ColumnIndicator::Left);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Middle, ColumnIndicator::Left);
+			game.playPiece(Player::X, Row::Top, Column::Left);
+			game.playPiece(Player::O, Row::Middle, Column::Left);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Middle);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Top, ColumnIndicator::Middle);
+			game.playPiece(Player::X, Row::Middle, Column::Middle);
+			game.playPiece(Player::O, Row::Top, Column::Middle);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, ColumnIndicator::Right);
+			game.playPiece(Player::X, Row::Bottom, Column::Right);
 
 			BoardState state = game.getCurrentState();
-			Assert::AreEqual(PlayerIndicator::X, state.winner);
+			Assert::AreEqual(Player::X, state.winner);
 			Assert::IsTrue(state.gameFinished);
 
 			game.reset();
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, ColumnIndicator::Left);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Middle, ColumnIndicator::Left);
+			game.playPiece(Player::X, Row::Bottom, Column::Left);
+			game.playPiece(Player::O, Row::Middle, Column::Left);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Middle);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Middle, ColumnIndicator::Right);
+			game.playPiece(Player::X, Row::Middle, Column::Middle);
+			game.playPiece(Player::O, Row::Middle, Column::Right);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Top, ColumnIndicator::Right);
+			game.playPiece(Player::X, Row::Top, Column::Right);
 
 			state = game.getCurrentState();
-			Assert::AreEqual(PlayerIndicator::X, state.winner);
+			Assert::AreEqual(Player::X, state.winner);
 			Assert::IsTrue(state.gameFinished);
 		}
 
@@ -288,54 +288,54 @@ namespace TicTacToeGameTests
 		{
 			TicTacToeGame game;
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Left);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Top, ColumnIndicator::Left);
+			game.playPiece(Player::X, Row::Middle, Column::Left);
+			game.playPiece(Player::O, Row::Top, Column::Left);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, ColumnIndicator::Middle);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Middle, ColumnIndicator::Middle);
+			game.playPiece(Player::X, Row::Bottom, Column::Middle);
+			game.playPiece(Player::O, Row::Middle, Column::Middle);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Right);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Bottom, ColumnIndicator::Right);
+			game.playPiece(Player::X, Row::Middle, Column::Right);
+			game.playPiece(Player::O, Row::Bottom, Column::Right);
 
 			BoardState state = game.getCurrentState();
-			Assert::AreEqual(PlayerIndicator::O, state.winner);
+			Assert::AreEqual(Player::O, state.winner);
 			Assert::IsTrue(state.gameFinished);
 
 			game.reset();
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Left);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Middle, ColumnIndicator::Middle);
+			game.playPiece(Player::X, Row::Middle, Column::Left);
+			game.playPiece(Player::O, Row::Middle, Column::Middle);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, ColumnIndicator::Middle);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Bottom, ColumnIndicator::Left);
+			game.playPiece(Player::X, Row::Bottom, Column::Middle);
+			game.playPiece(Player::O, Row::Bottom, Column::Left);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Right);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Top, ColumnIndicator::Right);
+			game.playPiece(Player::X, Row::Middle, Column::Right);
+			game.playPiece(Player::O, Row::Top, Column::Right);
 
 			state = game.getCurrentState();
-			Assert::AreEqual(PlayerIndicator::O, state.winner);
+			Assert::AreEqual(Player::O, state.winner);
 			Assert::IsTrue(state.gameFinished);
 		}
 
 		TEST_METHOD(AssertPlayPieceUpdatesGameFinishedWhenNoMovesLeft)
 		{
 			TicTacToeGame game;
-			game.playPiece(PlayerIndicator::X, RowIndicator::Top, ColumnIndicator::Left);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Top, ColumnIndicator::Middle);
+			game.playPiece(Player::X, Row::Top, Column::Left);
+			game.playPiece(Player::O, Row::Top, Column::Middle);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Middle);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Top, ColumnIndicator::Right);
+			game.playPiece(Player::X, Row::Middle, Column::Middle);
+			game.playPiece(Player::O, Row::Top, Column::Right);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Middle, ColumnIndicator::Right);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Middle, ColumnIndicator::Left);
+			game.playPiece(Player::X, Row::Middle, Column::Right);
+			game.playPiece(Player::O, Row::Middle, Column::Left);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, ColumnIndicator::Left);
-			game.playPiece(PlayerIndicator::O, RowIndicator::Bottom, ColumnIndicator::Right);
+			game.playPiece(Player::X, Row::Bottom, Column::Left);
+			game.playPiece(Player::O, Row::Bottom, Column::Right);
 
-			game.playPiece(PlayerIndicator::X, RowIndicator::Bottom, ColumnIndicator::Middle);
+			game.playPiece(Player::X, Row::Bottom, Column::Middle);
 
 			BoardState state = game.getCurrentState();
-			Assert::AreEqual(PlayerIndicator::None, state.winner);
+			Assert::AreEqual(Player::None, state.winner);
 			Assert::IsTrue(state.gameFinished);
 		}
 	};

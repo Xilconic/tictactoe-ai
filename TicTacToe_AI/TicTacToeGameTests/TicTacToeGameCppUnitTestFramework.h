@@ -10,15 +10,15 @@ namespace Microsoft
 	{
 		namespace CppUnitTestFramework
 		{
-			template<> static std::wstring ToString<PlayerIndicator>(const PlayerIndicator& indicator)
+			template<> static std::wstring ToString<Player>(const Player& indicator)
 			{
 				switch (indicator)
 				{
-				case PlayerIndicator::None:
+				case Player::None:
 					return L"None";
-				case PlayerIndicator::X:
+				case Player::X:
 					return L"X";
-				case PlayerIndicator::O:
+				case Player::O:
 					return L"O";
 				default:
 					return L"";

@@ -15,7 +15,7 @@
 /*
  Denotes the player, if any.
 */
-enum class TICTACTOEGAME_API PlayerIndicator 
+enum class TICTACTOEGAME_API Player 
 {
 	/*
 	 Denoted the absense of a player.
@@ -34,7 +34,7 @@ enum class TICTACTOEGAME_API PlayerIndicator
 /*
  Denotes the row to play a piece to.
 */
-enum class TICTACTOEGAME_API RowIndicator
+enum class TICTACTOEGAME_API Row
 {
 	Top = 0,
 	Middle = 1,
@@ -44,7 +44,7 @@ enum class TICTACTOEGAME_API RowIndicator
 /*
  Denotes the column to play a piece to.
 */
-enum class TICTACTOEGAME_API ColumnIndicator
+enum class TICTACTOEGAME_API Column
 {
 	Left = 0,
 	Middle = 1,
@@ -59,24 +59,24 @@ struct TICTACTOEGAME_API BoardState
 	/*
 	 The state of the 3x3 game board, indicating where players have played their pieces.
 	*/
-	std::array<std::array<PlayerIndicator, 3>, 3> boardCells = 
+	std::array<std::array<Player, 3>, 3> boardCells = 
 	{
 		{
-			{{ PlayerIndicator::None, PlayerIndicator::None, PlayerIndicator::None }},
-			{{ PlayerIndicator::None, PlayerIndicator::None, PlayerIndicator::None }},
-			{{ PlayerIndicator::None, PlayerIndicator::None, PlayerIndicator::None }}
+			{{ Player::None, Player::None, Player::None }},
+			{{ Player::None, Player::None, Player::None }},
+			{{ Player::None, Player::None, Player::None }}
 		}
 	};
 
 	/*
 	 Indicates the player whose turn it it.
 	*/
-	PlayerIndicator curentPlayer = PlayerIndicator::None;
+	Player curentPlayer = Player::None;
 
 	/*
 	 Indicates the winner of the game.
 	*/
-	PlayerIndicator winner = PlayerIndicator::None;
+	Player winner = Player::None;
 
 	/*
 	 Indicates if the game is finished.
@@ -93,10 +93,10 @@ private:
 	char nrOfPiecesPlayed;
 
 	void toggleNextPlayer(void);
-	PlayerIndicator determineWinner(void);
-	bool isThreeInRow(PlayerIndicator, RowIndicator);
-	bool isThreeInColumn(PlayerIndicator, ColumnIndicator);
-	bool isThreeInDiagonal(PlayerIndicator);
+	Player determineWinner(void);
+	bool isThreeInRow(Player, Row);
+	bool isThreeInColumn(Player, Column);
+	bool isThreeInDiagonal(Player);
 	
 public:
 	/*
@@ -112,7 +112,7 @@ public:
 	/*
 	 Marks the move of a player playing a piece to the board. Returns false for an invalid move.
 	*/
-	bool playPiece(PlayerIndicator, RowIndicator, ColumnIndicator);
+	bool playPiece(Player, Row, Column);
 
 	/*
 	 Resets the board to the starting situation.

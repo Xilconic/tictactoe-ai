@@ -13,11 +13,11 @@ void TicTacToeGame::toggleNextPlayer()
 {
 	switch (state.curentPlayer)
 	{
-	case PlayerIndicator::X:
-		state.curentPlayer = PlayerIndicator::O;
+	case Player::X:
+		state.curentPlayer = Player::O;
 		break;
-	case PlayerIndicator::O:
-		state.curentPlayer = PlayerIndicator::X;
+	case Player::O:
+		state.curentPlayer = Player::X;
 		break;
 	}
 }
@@ -27,7 +27,7 @@ BoardState TicTacToeGame::getCurrentState()
 	return state;
 }
 
-bool TicTacToeGame::isThreeInRow(PlayerIndicator player, RowIndicator row)
+bool TicTacToeGame::isThreeInRow(Player player, Row row)
 {
 	char rowIndex = char(row);
 	return state.boardCells[rowIndex][0] == player &&
@@ -35,7 +35,7 @@ bool TicTacToeGame::isThreeInRow(PlayerIndicator player, RowIndicator row)
 		state.boardCells[rowIndex][2] == player;
 }
 
-bool TicTacToeGame::isThreeInColumn(PlayerIndicator player, ColumnIndicator column)
+bool TicTacToeGame::isThreeInColumn(Player player, Column column)
 {
 	char columnIndex = char(column);
 	return state.boardCells[0][columnIndex] == player &&
@@ -43,7 +43,7 @@ bool TicTacToeGame::isThreeInColumn(PlayerIndicator player, ColumnIndicator colu
 		state.boardCells[2][columnIndex] == player;
 }
 
-bool TicTacToeGame::isThreeInDiagonal(PlayerIndicator player)
+bool TicTacToeGame::isThreeInDiagonal(Player player)
 {
 	return (state.boardCells[0][0] == player &&
 			state.boardCells[1][1] == player &&
@@ -53,14 +53,14 @@ bool TicTacToeGame::isThreeInDiagonal(PlayerIndicator player)
 			state.boardCells[0][2] == player);
 }
 
-PlayerIndicator TicTacToeGame::determineWinner()
+Player TicTacToeGame::determineWinner()
 {
-	PlayerIndicator players[2] = { PlayerIndicator::X, PlayerIndicator::O };
+	Player players[2] = { Player::X, Player::O };
 	for (char i = 0; i < state.boardCells.size(); i++)
 	{
-		for each (PlayerIndicator player in players)
+		for each (Player player in players)
 		{
-			if (isThreeInRow(player, RowIndicator(i)))
+			if (isThreeInRow(player, Row(i)))
 			{
 				return player;
 			}
@@ -69,16 +69,16 @@ PlayerIndicator TicTacToeGame::determineWinner()
 
 	for (char i = 0; i < state.boardCells[0].size(); i++)
 	{
-		for each (PlayerIndicator player in players)
+		for each (Player player in players)
 		{
-			if (isThreeInColumn(player, ColumnIndicator(i)))
+			if (isThreeInColumn(player, Column(i)))
 			{
 				return player;
 			}
 		}
 	}
 
-	for each (PlayerIndicator player in players)
+	for each (Player player in players)
 	{
 		if (isThreeInDiagonal(player))
 		{
@@ -86,10 +86,10 @@ PlayerIndicator TicTacToeGame::determineWinner()
 		}
 	}
 
-	return PlayerIndicator::None;
+	return Player::None;
 }
 
-bool TicTacToeGame::playPiece(PlayerIndicator player, RowIndicator row, ColumnIndicator column)
+bool TicTacToeGame::playPiece(Player player, Row row, Column column)
 {
 	if (player != state.curentPlayer)
 	{
@@ -97,7 +97,7 @@ bool TicTacToeGame::playPiece(PlayerIndicator player, RowIndicator row, ColumnIn
 	}
 	char rowIndex = char(row);
 	char columnIndex = char(column);
-	if (state.boardCells[rowIndex][columnIndex] != PlayerIndicator::None)
+	if (state.boardCells[rowIndex][columnIndex] != Player::None)
 	{
 		return false;
 	}
@@ -106,7 +106,7 @@ bool TicTacToeGame::playPiece(PlayerIndicator player, RowIndicator row, ColumnIn
 	nrOfPiecesPlayed++;
 
 	state.winner = determineWinner();
-	if (state.winner != PlayerIndicator::None || nrOfPiecesPlayed == 9)
+	if (state.winner != Player::None || nrOfPiecesPlayed == 9)
 	{
 		state.gameFinished = true;
 	}
@@ -118,6 +118,6 @@ bool TicTacToeGame::playPiece(PlayerIndicator player, RowIndicator row, ColumnIn
 void TicTacToeGame::reset()
 {
 	state = BoardState();
-	state.curentPlayer = PlayerIndicator::X;
+	state.curentPlayer = Player::X;
 	nrOfPiecesPlayed = 0;
 }

@@ -1,15 +1,30 @@
 #include "stdafx.h"
 #include "TicTacToeGameEnvironment.h"
 
-GameEnvironment::GameEnvironment(GamePlayer* x, GamePlayer* o)
+GameEnvironment::GameEnvironment(GamePlayer & x, GamePlayer & o)
 {
-	// TODO: Probably need to clean up API of constructor.
+	playerX = &x;
+	playerO = &o;
 }
 
-GamePlayer* GameEnvironment::getCurrentPlayer() const
+GamePlayer* GameEnvironment::getCurrentPlayer(const BoardState & currentState) const
 {
-	// TODO: get current player based on board state's current player
-	return 0;
+	switch (currentState.curentPlayer)
+	{
+		case Player::X:
+				return playerX;
+		case Player::O:
+			return playerO;
+	}
+}
+
+void GameEnvironment::processTurn()
+{
+	BoardState currentState = game.getCurrentState();
+
+	GamePlayer* currentPlayer = getCurrentPlayer(currentState);
+	Move intendedMove = currentPlayer->getMove(currentState);
+	game.playPiece(currentState.curentPlayer, intendedMove.row, intendedMove.column);
 }
 
 void GameEnvironment::playGame()
@@ -17,11 +32,6 @@ void GameEnvironment::playGame()
 	game.reset();
 	while (!game.getCurrentState().gameFinished)
 	{
-		GamePlayer* currentPlayer = getCurrentPlayer();
-
-		BoardState currentState = game.getCurrentState();
-		// TODO: this is probably passing by value? Should be passing by reference?
-		Move intendedMove = currentPlayer->getMove(currentState);
-		game.playPiece(currentState.curentPlayer, intendedMove.row, intendedMove.column);
+		processTurn();
 	}
 }

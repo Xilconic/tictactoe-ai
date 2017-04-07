@@ -10,12 +10,12 @@ void TicTacToeGame::toggleNextPlayer()
 {
 	switch (state.curentPlayer)
 	{
-	case Player::X:
-		state.curentPlayer = Player::O;
-		break;
-	case Player::O:
-		state.curentPlayer = Player::X;
-		break;
+		case Player::X:
+			state.curentPlayer = Player::O;
+			break;
+		case Player::O:
+			state.curentPlayer = Player::X;
+			break;
 	}
 }
 

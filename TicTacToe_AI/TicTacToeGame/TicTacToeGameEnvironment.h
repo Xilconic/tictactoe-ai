@@ -11,10 +11,11 @@ private:
 	GamePlayer * playerO;
 	TicTacToeGame game;
 
-	GamePlayer* getCurrentPlayer() const;
+	GamePlayer* getCurrentPlayer(const BoardState &) const;
+	void processTurn(void);
 
 public:
-	GameEnvironment(GamePlayer*, GamePlayer*);
+	GameEnvironment(GamePlayer &, GamePlayer &);
 
 	/*
 	 Plays a game of tic-tac-toe between two players.

@@ -34,7 +34,7 @@ public:
 	/*
 	 Determines the move the players intends to take for the given game state.
 	*/
-	virtual Move getMove(BoardState gamestate) = 0;
+	virtual Move getMove(const BoardState &) = 0;
 };
 
 #endif // !__TICTACTOE_GAMEPLAYER_H_INCLUDED__

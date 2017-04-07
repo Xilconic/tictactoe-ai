@@ -11,7 +11,7 @@ private:
 	GamePlayer * playerO;
 	TicTacToeGame game;
 
-	GamePlayer* getCurrentPlayer();
+	GamePlayer* getCurrentPlayer() const;
 
 public:
 	GameEnvironment(GamePlayer*, GamePlayer*);

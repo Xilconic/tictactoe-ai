@@ -47,10 +47,10 @@ private:
 	char nrOfPiecesPlayed;
 
 	void toggleNextPlayer(void);
-	Player determineWinner(void);
-	bool isThreeInRow(Player, Row);
-	bool isThreeInColumn(Player, Column);
-	bool isThreeInDiagonal(Player);
+	Player determineWinner(void) const;
+	bool isThreeInRow(Player, Row) const;
+	bool isThreeInColumn(Player, Column) const;
+	bool isThreeInDiagonal(Player) const;
 
 public:
 	/*
@@ -61,7 +61,7 @@ public:
 	/*
 	Gets the curent board state.
 	*/
-	BoardState getCurrentState(void);
+	BoardState getCurrentState(void) const;
 
 	/*
 	Marks the move of a player playing a piece to the board. Returns false for an invalid move.

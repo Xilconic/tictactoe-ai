@@ -6,7 +6,7 @@ GameEnvironment::GameEnvironment(GamePlayer* x, GamePlayer* o)
 	// TODO: Probably need to clean up API of constructor.
 }
 
-GamePlayer* GameEnvironment::getCurrentPlayer()
+GamePlayer* GameEnvironment::getCurrentPlayer() const
 {
 	// TODO: get current player based on board state's current player
 	return 0;
